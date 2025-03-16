@@ -137,6 +137,93 @@ DevOps is a methodology that fosters collaboration between development and opera
     - Companies with legacy applications not easily moved to the cloud
     - Environments requiring low latency and direct access to hardware
 
+## Cloud Service Models: IaaS, PaaS, and SaaS
+
+## Infrastructure as a Service (IaaS)
+
+- IaaS provides the most fundamental building blocks for cloud IT. With IaaS, you rent computing infrastructure—such as virtual machines, storage, and networking—over the internet. It offers the highest level of flexibility and control over IT resources.
+
+- Key Features of IaaS:
+
+    - Virtual Machines: You can create and configure virtual machines as needed.
+    - Networking: You get access to customizable networks, firewalls, and load balancers.
+    - Storage: You can use different storage types, including block, object, and file storage.
+    - Scalability: You can scale the infrastructure up or down as needed.
+    - Self-Service: You have full control to manage and operate the infrastructure.
+
+- Use Cases of IaaS:
+
+    - Website Hosting: Hosting websites or web applications.
+    - Development and Testing: Provision environments for developing and testing applications.
+    - Big Data Analysis: Run large data analysis workloads.
+    - Backup and Recovery: Provide backup, recovery, and disaster recovery solutions.
+
+- Examples of IaaS Providers:
+
+    - Amazon Web Services (AWS) EC2
+    - Microsoft Azure Virtual Machines
+    - Google Cloud Platform Compute Engine
+
+- IaaS Responsibility Model:
+    - Customer manages: Applications, data, runtime, middleware, and operating system.
+    - Cloud provider manages: Virtualization, servers, storage, and networking.
+
+## Platform as a Service (PaaS)
+
+- PaaS provides a platform that allows developers to build, test, and deploy applications without managing the underlying infrastructure. The cloud provider takes care of the operating system, middleware, runtime, and even some development tools.
+
+- Key Features of PaaS:
+
+    - Development Frameworks: Provides frameworks and tools for developers to build applications (e.g., Java, .NET, Python).
+    - Database Management: Includes managed database services (SQL or NoSQL databases).
+    - Middleware: Handles integration with messaging services, API management, etc.
+    - Application Hosting: Automates the deployment and scaling of web applications.
+
+- Use Cases of PaaS:
+
+    - Application Development: Quickly build and deploy web applications.
+    - API Development: Develop and host APIs without worrying about infrastructure.
+    - Mobile App Development: Create backends for mobile apps.
+    - DevOps: Continuous integration and delivery (CI/CD) environments for testing and deploying applications.
+
+- Examples of PaaS Providers:
+
+    - Google App Engine (GAE)
+    - Microsoft Azure App Services
+    - Heroku
+    - AWS Elastic Beanstalk
+
+- PaaS Responsibility Model:
+
+    - Customer manages: Applications and data.
+    - Cloud provider manages: Runtime, middleware, operating system, servers, storage, and networking.
+
+## Software as a Service (SaaS)
+
+- SaaS delivers software applications over the internet on a subscription basis. SaaS applications are fully managed by the cloud provider, so users don’t need to worry about underlying infrastructure, maintenance, or updates.
+
+- Key Features of SaaS:
+
+    - Web-Based Access: Access software applications via a web browser.
+    - Managed Hosting: The provider handles all aspects of hosting and maintaining the software.
+    - Subscription-Based: Pay on a subscription basis, typically monthly or annually.
+    - Automatic Updates: The service provider handles all software updates and patches.
+
+- Use Cases of SaaS:
+    - Email Services: Business email platforms like Gmail and Microsoft Outlook.
+    - Collaboration Tools: Tools like Microsoft Teams, Slack, and Google Workspace.
+    - CRM Systems: Customer relationship management platforms like Salesforce.
+    - Office Applications: Microsoft Office 365, Google Docs.
+
+- Examples of SaaS Providers:
+
+    - Google Workspace (Gmail, Docs, Drive)
+    - Microsoft Office 365
+    - Salesforce
+    - Dropbox
+
+- SaaS Responsibility Model:
+    - Cloud provider manages everything, including the application, runtime, middleware, operating system, servers, storage, and networking.
 
 ## Virtualization
 
@@ -265,4 +352,26 @@ sudo systemctl start httpd
 - Use the below command to stop the Apache web server:
 ```
 sudo systemctl stop httpd
+```
+
+### vi editor
+
+- Use the below command to edit the file using vi editor:
+```
+vi <file-name>
+```
+
+- Use the below command to insert the text in the file:
+```
+i
+```
+
+- Use the below command to save the file:
+```
+:wq
+```
+
+- Use the below command to exit from the file without saving the file:
+```
+:q!
 ```

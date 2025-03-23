@@ -1,0 +1,7 @@
+[Unit]
+Description=My Python App
+
+[Service]
+ExecStart= python3 /app.py
+MemoryMax=100M
+CPUShares=1024

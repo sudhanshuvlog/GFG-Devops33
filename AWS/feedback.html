@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      color: blue;
+      text-align: center;
+    }
+    form {
+      width: 50%;
+      margin: 0 auto;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    button {
+      background-color: blue;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Session Feedback Form</h1>
+  <form id="contact-form" method="post">
+    <h4>Anonymus Name:</h4>
+    <input type="text" id="name-input" placeholder="Enter name" required />
+    
+    <h4>Feedback:</h4>
+    <textarea id="feedback-input" placeholder="Please enter your feedback..." required></textarea>
+    
+    <button type="submit" onclick="submitToAPI(event)">Submit</button>
+  </form>
+
+  <script>
+    function submitToAPI(e) {
+      e.preventDefault();
+      var name = $("#name-input").val();
+      var feedback = $("#feedback-input").val();
+
+      var data = {
+        name: name,
+        feedback: feedback
+      };
+
+      $.ajax({
+        type: "POST",
+        url: "https://a9xnsqpj20.execute-api.ap-south-1.amazonaws.com/prod/feedback",
+        dataType: "json",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
+        success: function () {
+          alert("Feedback successfully submitted! Thank you.");
+          document.getElementById("contact-form").reset();
+        },
+        error: function () {
+          alert("Error submitting feedback. Please try again later.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>

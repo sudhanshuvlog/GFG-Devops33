@@ -4,8 +4,8 @@ print('Loading function')
 
 def lambda_handler(event, context):
     json_str = json.dumps(event)
-    sns_client = boto3.client('sns', region_name='ap-southeast-1') 
-    SNS_TOPIC_ARN = "arn:aws:sns:ap-southeast-1:891377007663:mytopic1234new"
+    sns_client = boto3.client('sns', region_name='ap-south-1') 
+    SNS_TOPIC_ARN = "arn:aws:sns:ap-south-1:891377007663:gfg33"
     #load the json to a string
     resp = json.loads(json_str)
     feedback = event.get('feedback', 'No feedback provided')

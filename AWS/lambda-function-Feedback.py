@@ -9,7 +9,7 @@ def lambda_handler(event, context):
     #load the json to a string
     resp = json.loads(json_str)
     feedback = event.get('feedback', 'No feedback provided')
-    name = event.get('name', 'AnonymousSdsd')
+    name = event.get('name', 'Anonymous')
 
     # Prepare the message
     message = f"Received feedback: '{feedback}' from {name}"

@@ -51,7 +51,7 @@ history
    25  pwd
 
    26  cd /
-
+dsdsdsd
    27  ls
 
    28  cd var/

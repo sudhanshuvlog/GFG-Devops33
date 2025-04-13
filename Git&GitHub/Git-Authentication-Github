@@ -1,0 +1,37 @@
+Authenticating Git with GitHub Via SSH, Follow Below Steps 👇
+
+Show all Git configurations (global configurations with "--global" option)
+#git config -l
+
+Set email globally (for all repositories)
+#git config --global user.email "your email address"
+
+Set GitHub username globally
+#git config --global user.name "your GitHub username"
+
+Add the GitHub repository as the origin
+#git remote add origin git@github.com:<GitHubUsername>/<RepoName>.git
+
+Generate SSH key pair using RSA algorithm
+#ssh-keygen
+
+Add the generated public key to GitHub
+GitHub > Settings > Manage SSH & GPG Keys > Add new key > Add Public Key**
+
+Test the SSH connection to GitHub
+ssh -T git@github.com
+
+Push local code to the central repository and set up tracking
+git push --set-upstream origin master 
+
+
+Authenticating Git with GitHub Via HTTPS, Follow Below Steps 👇
+
+#git remote add origin https://github.com/Trainersudhanshu/test1repo.git
+
+Go to Github -> Settings -> Developer Settings -> Access Token(classic) -> Create a classic Access Token by giving a name
+
+#git config user.email "<email>"
+#git config user.name "<username>
+
+#git remote set-url origin https://<username>:<token>@github.com/<username>/<reponame>.git

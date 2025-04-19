@@ -76,3 +76,35 @@
     Disk Usage: /home (50%)
     ```
 
+## Task-4: Develop a Serverless Image Processing Web App Using AWS-S3-SNS-Lambda-APIGateway-IAM-CloudWatch-Rekognisation
+
+- Create a sample web application that allows users to upload an image. Upon image submission, the application will leverage various AWS services to process the image and handle potential failures.
+
+- Task Details:
+
+    - Frontend: 
+        - Build a simple web interface where users can upload an image.
+        - Host the frontend on an AWS EC2 instance.
+
+    - Backend Architecture:
+
+        - When the user submits an image, trigger an API Gateway endpoint.
+        - The API Gateway will invoke an AWS Lambda function.
+
+    - Lambda Function:
+
+        - Use Boto3 (AWS SDK for Python) in the Lambda function to handle the following actions:
+            - Store the image in an S3 bucket.
+            - Send the image to AWS Rekognition for image analysis (e.g., detecting facial expressions like happy, sad, etc.).
+            - Return the image analysis result to the frontend.
+
+    - Failure Handling:
+
+        - In case of a failure during any part of the process, the Lambda function should send a message to Amazon SNS.
+        - SNS will notify subscribers (e.g., the developer's email) about the failure.
+
+    - Deliverables:
+
+        - A fully functional web application running on EC2.
+        - A Lambda function that stores images in S3, integrates with Rekognition, and sends SNS alerts in case of failure.
+

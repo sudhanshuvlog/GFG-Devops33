@@ -1,0 +1,5 @@
+* Launch docker container -             #docker run -dit --name webos -p 80:80 centos:7
+* Go inside the container -             #docker attach webos
+* Install httpd inside the container -  #yum install httpd -y
+* Create the webpages -                 #vi /var/www/html/index.html -> "this is my website hosted on container"
+* Start the webserver -                 #/usr/sbin/httpd - Start the server

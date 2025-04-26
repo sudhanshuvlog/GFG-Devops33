@@ -1,0 +1,38 @@
+name: mywordpressproj
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    networks:
+      - gfgnet
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: gfg
+      WORDPRESS_DB_PASSWORD: redhat
+      WORDPRESS_DB_NAME: gfgdb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0
+    restart: always
+    networks:
+      - gfgnet
+    environment:
+      MYSQL_DATABASE: gfgdb
+      MYSQL_USER: gfg
+      MYSQL_PASSWORD: redhat
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
+
+networks:
+  gfgnet:
+    driver: bridge

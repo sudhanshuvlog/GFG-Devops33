@@ -130,6 +130,60 @@ docker run -it <image_name> bash
 
 ---
 
+### Docker Compose
+
+It is a tool for defining and running multi-container Docker applications. With Compose, We can use a YAML file to configure our application’s services. Then, with a single command, We can create and start all the services from our configuration.
+
+**Example docker-compose.yml of Wordpress Application**
+
+```yaml
+version: '3.1'
+name: mywordpressproj
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
+```
+
+- After creating a docker-compose.yml file, you can run the following command to start the application:
+
+```bash
+docker-compose up -d
+```
+- To delete all the containers created by docker-compose, you can run the following command:
+
+```bash
+docker-compose down
+```
+---
+
+
+
 ### Docker Hub
 
 Docker Hub is a container registry built for developers and open source contributors to find, use, and share their container images. With DockerHub, developers can host public repos that can be used for free, or private repos for teams and enterprises.

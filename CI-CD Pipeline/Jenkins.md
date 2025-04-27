@@ -73,6 +73,16 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
     * `curl -sO http://54.146.158.246:8080/jnlpJars/agent.jar`
     * `java -jar agent.jar -jnlpUrl http://54.146.158.246:8080/computer/ec2/jenkins-agent.jnlp -secret 557af3ada1a128916ce4cac68d93ce7eb1b6d5e186ac18f43972697165a9f0d8 -workDir "/" &`
 
+### Jenkins Server
+
+- My Python Flask App Repository used for demonstration(Snake Game)[https://github.com/sudhanshuvlog/SnakeGame.git]
+
+- Create Cron Schedule Expression - https://crontab.guru/
+
+- DevOps First CI-CD Pipeline ![Build Pipeline](buildpipeline.png)
+
+- *Jenkinsfile* - A Jenkinsfile is a text file that contains the definition of a Jenkins Pipeline. It is written using the Groovy DSL (Domain-Specific Language) and is used to define the entire build process, including stages, steps, and other configurations. This approach provides consistency, repeatability, and easy collaboration in the software development and deployment process. A sample pipeline with name `jenkinsfile` is present in this repo.
+
 ### Why do we need Jenkins Cluster (Or) Jenkins Master-Slave Architecture?
 
 - **Jenkins Cluster** is a group of Jenkins master nodes and slave nodes.
@@ -82,3 +92,46 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 - Handling increased workload or parallel jobs might be challenging for a single machine, leading to slower build times.
 - If the master server fails or becomes unavailable, the entire CI/CD process is disrupted.
+
+### Pipeline in Jenkins
+
+- Jenkins Pipeline streamlines the execution of multiple stages within a single job, simplifying the overall workflow.
+- **Pre-requisites** - You need to install the `Pipeline plugin` in your Jenkins server.
+- Before the installation of the Pipeline plugin, the conventional approach involved running multiple jobs to handle distinct stages of a process.
+- With the installation of the Pipeline plugin, the need for managing multiple jobs is eliminated. Now, all stages can be seamlessly executed within a single job, optimizing the CI/CD pipeline.
+
+### Jenkinsfile
+
+- In Pipeline, we can define the stages in a file called `Jenkinsfile`.
+- Jenkinsfile uses Groovy language.
+- By encapsulating all stages within the Jenkinsfile, users can execute an entire workflow within a single job. This simplifies job management and enhances pipeline efficiency.
+- Example of Jenkinsfile:
+
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
+```
+
+### Jenkins Pipeline Triggers
+
+- Poll SCM - It will check the changes in the repository for every x minutes we mentioned.
+- If we use `Poll SCM` trigger, It will waste a lot of resources, It is better for the use cases for data backup, etc.
+- So we can use `Webhook` trigger, This trigger is event-driven and activates the Jenkins job only when there is a change in the repository.

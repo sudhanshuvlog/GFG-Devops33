@@ -5,7 +5,23 @@
 ## Job1-TestApp
 
 ```bash
-pwd
 yum install python3-pip -y
-pip3 install flake8
+pip3 install -r requirements.txt
+pwd
+flake8 .
+pytest
+```
+## Job2-docker-build
+
+```bash
+yum install docker -y
+systemctl start docker
+docker build -t gfgweb .
+```
+
+## Job3-DeployApp
+
+```bash
+docker rm -f webos
+docker run -dit --name webos -p 80:80 gfgweb
 ```

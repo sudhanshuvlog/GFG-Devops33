@@ -1,0 +1,45 @@
+pipeline {
+    agent {
+        label 'python'
+    }
+
+    stages { //collection of jobs
+        stage('Download the source repo') { //stage == job
+            steps { // job steps
+               git branch: 'main', url: 'https://github.com/sudhanshuvlog/pythonapp-devops33.git'
+            }
+        }
+        stage("Install Python"){
+            steps{
+                sh 'yum install python3 -y'
+            }
+        }
+        stage("Install pip"){
+            steps{
+                sh 'yum install python3-pip -y'
+            }
+        }
+        stage("Install dependencies"){
+            steps{
+                sh 'pip3 install -r requirements.txt'
+            }
+        }
+        stage("Execute flake8 and unit test cases"){
+            steps{
+                sh 'python3 -m flake8 --max-line-length=100 --ignore=E501,E402,E731,E722,E261,E265,E303,E501 .'
+                sh 'pytest'
+            }
+        }
+        stage("Build Docker image"){
+            steps{
+                sh 'docker build -t pythonapp:latest .'
+            }
+        }
+        stage("Run Docker container"){
+            steps{
+                sh 'docker rm -f webos'
+                sh 'docker run -d --name webos -p 80:80 pythonapp:latest'
+            }
+        }
+    }
+}

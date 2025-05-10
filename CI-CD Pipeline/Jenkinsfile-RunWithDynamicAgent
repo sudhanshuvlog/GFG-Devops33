@@ -1,0 +1,13 @@
+pipeline {
+    agent {dockerContainer 'jinny1/jenkinsslave'}
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+                sh 'yum install python3-pip -y'
+                sh 'pip3 install pandas'
+            }
+        }
+    }
+}

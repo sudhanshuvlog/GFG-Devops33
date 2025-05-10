@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    tools{
+        maven "Maven"
+    }
+    stages {
+        stage('Build') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Trainersudhanshu/sample-java-app.git'
+                //sh 'mvn test'
+                sh 'mvn clean package'
+                echo 'Build succesfull!'
+            }
+        }
+    }
+    post {
+        success{
+            archiveArtifacts artifacts: 'target/*.jar'
+        }
+    }
+}

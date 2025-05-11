@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-gfg
+  labels:
+    maintainer: gfg
+    env: prod
+    team: devops
+    cloud: aws
+spec:
+  containers:
+  - name: gfg
+    image: nginx
+    ports:
+    - containerPort: 80

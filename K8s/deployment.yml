@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gfg-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template: #pod template
+    metadata:
+      name: nginx-gfg
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: gfg
+        image: jinny1/mario-game
+        ports:
+        - containerPort: 80

@@ -7,7 +7,7 @@ metadata:
     dc: delhi
     app: mongo
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: mongo
@@ -22,6 +22,9 @@ spec:
         image: mongo
         ports:
         - containerPort: 27017
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongo-volume
         env:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
@@ -34,3 +37,7 @@ spec:
               secretKeyRef:
                 name: mongo-secret
                 key: mongo-password
+      volumes:
+        - name: mongo-volume
+          persistentVolumeClaim:
+            claimName: mongo-pvc

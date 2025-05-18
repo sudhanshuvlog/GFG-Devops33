@@ -95,7 +95,7 @@ metadata:
     dc: delhi
     app: mongo
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: mongo
@@ -110,6 +110,9 @@ spec:
         image: mongo
         ports:
         - containerPort: 27017
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongo-volume
         env:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
@@ -122,6 +125,10 @@ spec:
               secretKeyRef:
                 name: mongo-secret
                 key: mongo-password
+      volumes:
+        - name: mongo-volume
+          persistentVolumeClaim:
+            claimName: mongo-pvc
 ```
 
 **Explanation:**
@@ -309,10 +316,69 @@ data:
 - **data:** To define the data.
 - **mongo-url:** We give mongo-service as the value, So that the webapp can use the mongo-service to communicate with the database.
 
+7. **Create a PersistentVolume and PersistentVolumeClaim for MongoDB**
+
+- Create a file named `pv.yaml` and add the below content.
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  capacity:
+    storage: 0.5Gi
+  accessModes: 
+    - ReadWriteMany
+  local:
+    path: /storage/gfg
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - ip-192-168-37-184.ap-south-1.compute.internal
+```
+
+**Explanation:**
+
+- We are creating a PersistentVolume for the mongo database.
+- **capacity:** To define the capacity of the PV.
+- **accessModes:** To define the accessModes.
+- **local:** To define the path.
+- **nodeAffinity:** To define the nodeAffinity.
+
+8. Create a file named `pvc.yaml` and add the below content.
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 0.3Gi
+  storageClassName: ""
+```
+
+**Explanation:**
+
+- We are creating a PersistentVolumeClaim for the mongo database.
+- **accessModes:** To define the accessModes, here it is ReadWriteMany
+- **resources:** To define the resources.
+- **storageClassName:** To define the storageClassName.
+
 **Commands for the required files, Apply after you created each file**
 
 ```bash
 kubectl apply -f secret.yaml
+kubectl apply -f pv.yaml
+kubectl apply -f pvc.yaml
 kubectl apply -f mongo-app.yaml
 kubectl apply -f mongo-service.yaml
 kubectl apply -f mongo-config.yaml

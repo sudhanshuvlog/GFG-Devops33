@@ -7,4 +7,5 @@ GFG-Devops33 batch content
 * Mario Game Repo With Dockerfile & Code - https://github.com/sudhanshuvlog/MarioGameOnDocker
 * Python Flask App CI-CD Pipeline - https://github.com/sudhanshuvlog/pythonapp-devops33/tree/main
 * Snake Game Repo - https://github.com/sudhanshuvlog/SnakeGame
-* EKS Multi Node Cluster - https://github.com/sudhanshuvlog/K8s-MERN-App-Deployment/tree/main
+* EKS Multi Node Cluster - K8s MERN App Deployment - https://github.com/sudhanshuvlog/K8s-MERN-App-Deployment/tree/main
+* Movie Streaming App (Jenkins-EKS-RDS-S3) - https://github.com/sudhanshuvlog/Movie-Streaming-App-DevOps

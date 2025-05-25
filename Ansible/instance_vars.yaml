@@ -1,0 +1,8 @@
+region: ap-south-1
+instance_type: t2.micro
+security_group: default
+keyname: gfgkey25may
+name: Ansible-EC2
+image_id: ami-0af9569868786b23a
+subnet_id: subnet-04c1ed6ba9c55ffd7
+count: 2

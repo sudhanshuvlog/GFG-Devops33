@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars_files:
+    - instance_vars.yaml
+    - aws_credentials.yaml
+  tasks:
+    - name: "Install Python"
+      package:
+        name: 
+          - python
+          - python3-pip
+        state: present
+
+    - name: "Install boto3"
+      pip:
+        name: boto3
+
+    - amazon.aws.ec2_instance:
+        access_key: "{{ aws_access_key }}"
+        secret_key: "{{ aws_secret_key }}"
+        region: "{{ region }}"
+        name: "{{ name }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ image_id }}"
+        security_group: "{{ security_group }}"
+        vpc_subnet_id: "{{ subnet_id }}"
+        exact_count: "{{ count }}"
+        key_name: "{{ keyname }}"

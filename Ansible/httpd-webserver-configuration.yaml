@@ -1,0 +1,43 @@
+- hosts: all
+  vars:
+    packages:
+      - httpd
+      - python3-pip
+      - php
+      - docker
+      - nginx
+  tasks:
+    - name: "Install Package"
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages }}"
+      tags:
+        - install
+
+    - name: "Copy webpages to the server"
+      copy:
+        src: ./index.html
+        dest: /var/www/html
+        owner: root
+        group: root
+        mode: '777'
+      tags:
+        - copy
+
+    - name: "copy httpd config file"
+      copy:
+        src: httpd.conf
+        dest: /etc/httpd/conf/
+      notify:
+        - restart webserver
+      tags: 
+        - copy
+        - config
+
+  handlers:
+
+    - name: "restart webserver"
+      service:
+        name: httpd
+        state: restarted

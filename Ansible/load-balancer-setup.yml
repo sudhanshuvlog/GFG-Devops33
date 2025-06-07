@@ -1,0 +1,44 @@
+- hosts: localhost
+  vars_files:
+    - aws_credential.yml
+    - instance_vars.yml
+  tasks:
+    - package:
+        name: python3-pip
+        state: present
+    - pip:
+        name: boto3
+    - community.aws.ec2_instance:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: "{{ aws_region }}"
+        tags:
+          Name: "{{ name }}"
+        key_name: "{{ key_pair  }}"
+        instance_type: "{{ instance_type  }}"
+        image_id: "{{ aws_image }}"
+        vpc_subnet_id: "{{ subnet }}"
+        network:
+          assign_public_ip: true
+          security_group: default
+        count: "{{ count }}"
+      register: ec2
+    - debug:
+        var: ec2
+
+    - set_fact:
+        private_ip: "{{ ec2.instances | map(attribute='private_ip_address') | list }}"
+
+    - debug:
+        var: private_ip
+    - template:
+        src: inventory.j2
+        dest: inventory
+
+    - template: 
+        src: haproxy.j2
+        dest: /etc/haproxy/haproxy.cfg
+
+    - service:
+        name: haproxy
+        state: restarted

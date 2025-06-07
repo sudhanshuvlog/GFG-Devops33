@@ -1,0 +1,4 @@
+#Executing a role nfinx, please first install the role from ansible-galaxy
+- hosts: localhost
+  roles:
+    - nginxinc.nginx

@@ -1,0 +1,9 @@
+- hosts: all
+  tasks:
+    - name: "unarchive data from s3 and copy to target nodes"
+      unarchive:
+        src: https://mybucketgfg123.s3.ap-south-1.amazonaws.com/Microservices+App+Deployment+On+EKS-Devops.zip
+        dest: /
+        remote_src: yes
+    - debug:
+        msg: "{{ ansible_memory_mb }}"

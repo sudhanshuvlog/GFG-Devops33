@@ -1,0 +1,6 @@
+- hosts: k8s-master
+  tasks:
+    - debug:
+        var: ansible_facts
+    - debug:
+        msg: "{{ ansible_memtotal_mb }}"

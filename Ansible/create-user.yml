@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+    - name: "create user group"
+      group:
+        name: devs
+        state: present
+    - name: "create users"
+      user:
+        name: john
+        group: devs

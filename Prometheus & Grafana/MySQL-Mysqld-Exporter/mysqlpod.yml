@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: mysql-container-with-metrics
+  labels:
+    app: mysql
+spec:
+  containers:
+
+  - name: mysql
+    image: mysql:8.0
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: redhat
+      - name: MYSQL_DATABASE
+        value: gfg
+    ports:
+    - containerPort: 3306
+      name: mysql
+
+  - name: mysql-exporter
+    image: prom/mysqld-exporter:v0.12.1
+    env:
+      - name: DATA_SOURCE_NAME
+        value: root:redhat@(localhost:3306)/gfg
+    ports:
+      - containerPort: 9104
+        name: metrics

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "gfgdeployment"
+spec:
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      dc: "In"
+  template:
+    metadata:
+      name: "mypod"
+      labels:
+        dc: "In"
+        city: "delhi"
+    spec:
+      containers:
+        - name: "myos"
+          image: jinny1/gfg30sampleapp:v1
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "gfgservice"
+spec:
+  selector:
+    dc: "In"
+  ports:
+    - targetPort: 80
+      port: 80
+  type: LoadBalancer

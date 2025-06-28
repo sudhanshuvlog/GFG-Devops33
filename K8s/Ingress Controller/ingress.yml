@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
+spec:
+  tls:
+  - hosts:
+    - example.local
+    secretName: selfsigned-cert-tls
+  rules:
+  - host: example.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: example-service
+            port:
+              number: 8080

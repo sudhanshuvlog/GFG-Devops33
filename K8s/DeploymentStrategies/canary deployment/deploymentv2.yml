@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "deploymentv2"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "gfgapp"
+  template:
+    metadata:
+      name: "mypod"
+      labels:
+        app: "gfgapp"
+        city: "delhi"
+    spec:
+      containers:
+        - name: "myos"
+          image: jinny1/gfg30sampleapp:v2

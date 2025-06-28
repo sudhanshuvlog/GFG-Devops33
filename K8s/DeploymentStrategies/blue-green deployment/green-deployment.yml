@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "deploymentgreen"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      version: "v2"
+  template:
+    metadata:
+      name: "mypod"
+      labels:
+        version: "v2"
+        city: "delhi"
+    spec:
+      containers:
+        - name: "myos"
+          image: jinny1/gfg30sampleapp:v2
